@@ -1,82 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Phoenix editor</title>
+          <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DAVI Projekt</title>
         <link rel="stylesheet" href="styles.css" />
         <script src="script.js"></script>
-    </head>
+       <script src="lib/d3.min.js"></script>
+        
+        <style>
+    body {
+        background-image: url('images/Background.jpg'); /* Adjust path if necessary */
+        background-size: cover; /* Ensures the background covers the entire viewport */
+        background-repeat: no-repeat; /* Prevents tiling */
+        background-attachment: fixed; /* Keeps the background fixed while scrolling */
+    }
+</style>
 
+        
+    </head>
+   
     <body onload="onPageLoaded()">
-        <img id="starsLeft" alt="stars" src="images/stars-left.svg" />
+        
+    
+           
         <div id="mainDiv">
-            <img id="logo" alt="logo" src="images/phoenix-logo.svg" />
+            <img id="logo" alt="Spotify Logo" src="images/Spotify_Primary_Logo_RGB_Green.png" />
+
             <div id="MainText">
-                title="well am doing well thanks"
-                <h1>Phoenix Code</h1>
-                <span>Klicken Sie hier, um dieses &lt;span&gt; in der HTML-Datei zu finden<br /></span><br />
+                DAVI Project
+                <h1>What’s Hot on Spotify: Song Popularity Insights</h1>
+                
+   <!--           <span>Klicken Sie hier, um dieses &lt;span&gt; in der HTML-Datei zu finden<br /></span><br />    -->
             </div>
-            <div class="video-container">
-                <a
-                        href="https://www.youtube.com/watch?feature=player_embedded&v=Jkg3nAZ6vF8"
-                        target="_blank"
-                        title="Phoenix YouTube Channel">
-                    <img
-                            src="images/youtube_video.png"
-                            alt="Phoenix Code on YouTube"
-                            title="Phoenix Code on YouTube"
-                            style="max-width: 320px;" />
-                </a>
-                <svg class="play-button" viewBox="0 0 200 200" alt="Play video">
-                    <circle
-                            cx="100"
-                            cy="100"
-                            r="90"
-                            fill="#333"
-                            fill-opacity="0.6" />
-                    <polygon points="70, 55 70, 145 145, 100" fill="white" />
-                </svg>
-            </div>
+            
+ 
+    <!------------------------------ Embed YouTube Video as Audio ------------------------------>
+            <iframe
+    width="400"
+    height="280"
+    src="https://www.youtube.com/embed/X-yIEMduRXk?autoplay=1&loop=1&playlist=X-yIEMduRXk"
+    alt="Listen to Adele on YouTube"
+    allow="autoplay"
+    allowfullscreen
+    title="Background Music from YouTube">
+            </iframe>            
         </div>
-        <img id="cloudLeftTop" alt="cloud" src="images/vector-top-left.png" />
-        <img
-            id="cloudBottomRight"
-            alt="cloud"
-            src="images/vector-bottom-right.png" />
-        <img id="starsRight" alt="stars" src="images/stars-right.svg" />
-        <img
-            class="clouds"
-            alt="cloud"
-            style="z-index: 3; transform: translate(0px, -1.55909px)"
-            src="images/cloud1.svg" />
-        <img
-            class="clouds"
-            alt="cloud"
-            style="z-index: 6; transform: translate(0px, -2.33863px)"
-            src="images/cloud2.svg" />
-        <img
-            class="clouds"
-            alt="cloud"
-            style="z-index: 5; transform: translate(0px, -3.89772px)"
-            src="images/cloud3.svg" />
-        <img
-            class="clouds"
-            alt="cloud"
-            style="z-index: 6; transform: translate(0px, -3.89772px)"
-            src="images/cloud4.svg" />
-        <div class="night">
-            <div class="shooting_star">
-                <div class="shooting_star" />
-            </div>
+        
+    
+     <!-------------------------------- shooting star ------------------------------>
+        
+      <div class="night">
+        <div class="shooting_star">
+            <div class="shooting_star"></div>
         </div>
-        <div class="night">
-            <div class="shooting_star">
-                <div class="shooting_star" />
-            </div>
+    </div>
+    <div class="night">
+        <div class="shooting_star">
+            <div class="shooting_star"></div>
         </div>
-        <div class="night">
-            <div class="shooting_star">
-                <div class="shooting_star" />
-            </div>
-        </div>
-    </body>
+    </div>
+        
+        
+        
+             <!-------------------------------- CSV file ------------------------------>
+
+        
+        
+    <!-- CSV Data Visualization Section -->
+    <h1>Spotify Data Visualization</h1>
+    <div id="chart"></div>
+
+    <script>
+        // Load your CSV file
+        d3.csv("data/spotify-2023--Cleaned-DAVI-Project.csv").then(function(data) {
+            console.log("Data loaded:", data);
+
+            // Example: Display the first 5 rows in the console
+            data.slice(0, 5).forEach(row => {
+                console.log(row);
+            });
+
+            // Example Visualization: Simple Bar Chart (modify based on your data)
+            const svg = d3.select("#chart")
+                .append("svg")
+                .attr("width", 800)
+                .attr("height", 400);
+
+            // Example: Using a column named 'Popularity' for bar chart heights
+            const barWidth = 40;
+            const xSpacing = 10;
+            svg.selectAll("rect")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr("x", (d, i) => i * (barWidth + xSpacing))
+                .attr("y", d => 400 - parseInt(d.Popularity)) // Replace 'Popularity' with your actual column name
+                .attr("width", barWidth)
+                .attr("height", d => parseInt(d.Popularity))
+                .attr("fill", "steelblue");
+        }).catch(function(error) {
+            console.error("Error loading the CSV file:", error);
+        });
+    </script>
+        
+</body>
+        
 </html>
