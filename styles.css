@@ -7,7 +7,6 @@ html {
 /* General Body Styling */
 body {
     background: #000a2e;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,12 +25,12 @@ img {
 /* Main Div Styling */
 #mainDiv {
     color: #ffffffef;
-    position: relative; /* Changed from absolute to relative */
+    position: relative; /* Keep this as relative */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 5vh; /* Adds spacing at the top */
+    margin-top: 5vh;
     z-index: 8;
     text-align: center;
 }
