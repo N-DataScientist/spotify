@@ -1,45 +1,33 @@
 // Function that runs when the page is loaded
-// Called on page load, this function logs a message and triggers data visualization, 
-// making it ideal for initializing visuals once the page is ready
 function onPageLoaded() {
     console.log("Page loaded");
     loadAndVisualizeCSV();
 }
 
-// This function sets the CSV file path and initiates data loading, processing, and visualization, 
-// making it suitable as long as csvFilePath correctly points to the CSV location.
+// Load and visualize the CSV data
 function loadAndVisualizeCSV() {
     const csvFilePath = "data/spotify-2023--Cleaned-DAVI-Project.csv";
 
-    
-    // ******************************************************************
-    // Set up custom delimiter for tab-separated values
-    // d3.csv(csvFilePath, d3.autoType).then(function (data) {
-    // console.log("Data loaded", data);
-    // ******************************************************************
+    // Load the CSV file using d3.csv with autoType to convert numbers correctly
+    d3.csv(csvFilePath, d3.autoType).then(function (data) {
+        console.log("Data loaded", data);
 
-// This function creates an SVG element with specified width and height for the bar chart 
-// inside the #chart div, providing an appropriate setup for a fixed-size chart area.
+        // Set up the bar chart SVG
         const svgBar = d3.select("#chart")
             .append("svg")
             .attr("width", 800)
             .attr("height", 400);
-    
-// ******************************************************************
-//    const barWidth = 40;
-//    const xSpacing = 10;
-// ******************************************************************
-    
 
-//This function sets up a tooltip element to display additional information on hover, enhancing interactivity.    
+        const barWidth = 40;
+        const xSpacing = 10;
+
+        // Tooltip for bar chart
         const tooltip = d3.select("body")
             .append("div")
             .attr("class", "tooltip")
             .style("opacity", 0);
-    
 
-// This function renders or updates the bar chart based on provided data, using data.join() to 
-// dynamically add, update, or remove bars, with tooltips for interactivity and hover highlights.
+        // Function to update the bar chart
         function updateBars(data) {
             svgBar.selectAll("rect")
                 .data(data)
@@ -68,59 +56,45 @@ function loadAndVisualizeCSV() {
                 });
         }
 
-// This function calls updateBars to render the initial bar chart, ensuring it displays immediately once the data loads
+        // Initial render of the bar chart
         updateBars(data);
 
-// This function filters data by Popularity and updates the chart when the filterButton is clicked, 
-// effectively handling interactivity; however, ensure filterButton exists in the HTML or consider adding a check for its presence.
-        document.getElementById("filterButton").addEventListener("click", function () {
-            const filteredData = data.filter(d => parseInt(d.Popularity) > 50);
-            updateBars(filteredData);
-        });
-    
-    const filterButton = document.getElementById("filterButton");
-if (filterButton) {
-    filterButton.addEventListener("click", function () {
-        const filteredData = data.filter(d => parseInt(d.Popularity) > 50);
-        updateBars(filteredData);
-    });
-} else {
-    console.warn("Warning: 'filterButton' element not found in the HTML.");
-}
+        // Filter functionality for bar chart
+        const filterButton = document.getElementById("filterButton");
+        if (filterButton) {
+            filterButton.addEventListener("click", function () {
+                const filteredData = data.filter(d => parseInt(d.Popularity) > 50);
+                updateBars(filteredData);
+            });
+        } else {
+            console.warn("Warning: 'filterButton' element not found in the HTML.");
+        }
 
-
-// This function creates an SVG element for the bubble chart, providing an appropriate setup for 
-// displaying it below or next to the bar chart.
+        // Set up the bubble chart SVG
         const svgBubble = d3.select("#chart")
             .append("svg")
             .attr("width", 800)
             .attr("height", 600);
 
-//This function defines a square root scale to size each bubble based on the Streams value, ideal for 
-//visualizing large variances by keeping bubble sizes manageable and visually proportional.
+        // Radius scale for bubble chart
         const radiusScale = d3.scaleSqrt()
             .domain([0, d3.max(data, d => d.Streams)])
             .range([10, 50]);
-    
-    
-// This function creates a tooltip to display information for each bubble, effectively enhancing interactivity in 
-// the bubble chart.
+
+        // Tooltip for bubble chart
         const bubbleTooltip = d3.select("body")
             .append("div")
             .attr("class", "bubble-tooltip")
             .style("opacity", 0);
-    
-    
-// This function uses D3’s force simulation to position bubbles without overlap, providing a suitable method for 
-// dynamic, clear arrangement.
+
+        // D3 force simulation for bubbles
         const simulation = d3.forceSimulation(data)
             .force("charge", d3.forceManyBody().strength(-30))
             .force("center", d3.forceCenter(400, 300))
             .force("collision", d3.forceCollide().radius(d => radiusScale(d.Streams) + 2))
             .on("tick", ticked);
 
-// This function adds a circle for each data point and enables hover interactivity, effectively using mouseover, 
-// mousemove, and mouseout events to display relevant tooltip data.
+        // Create circles for each data point in bubble chart
         const circles = svgBubble.selectAll("circle")
             .data(data)
             .enter()
@@ -144,31 +118,24 @@ if (filterButton) {
                 bubbleTooltip.style("opacity", 0);
                 d3.select(this).attr("fill", "steelblue");
             });
-    
-    
-//This function adds a text label with the track name at each bubble’s center, effectively displaying names; for 
-//long names, consider truncating or dynamically adjusting font size.
+
+        // Add text labels inside each bubble
         const labels = svgBubble.selectAll("text")
             .data(data)
             .enter()
             .append("text")
-             .text(d => truncateText(d["Track Name"], 10)) // Limit to 10 characters
+            .text(d => truncateText(d["Track Name"], 10)) // Limit to 10 characters
             .attr("text-anchor", "middle")
             .attr("dy", 4)
             .attr("fill", "white")
-            .style("font-size", d => `${Math.max(10, radiusScale(d.Streams) / 3)}px`); // Adjust font size
-    
-// Helper function to truncate text if too long
-function truncateText(text, maxLength) {
-    return text.length > maxLength ? text.slice(0, maxLength) + '…' : text;
-}
+            .style("font-size", d => `${Math.max(10, radiusScale(d.Streams) / 3)}px`);
 
+        // Helper function to truncate text if too long
+        function truncateText(text, maxLength) {
+            return text.length > maxLength ? text.slice(0, maxLength) + '…' : text;
+        }
 
-
-    
-    
-//This function updates each circle and label position according to simulation calculations, effectively keeping 
-//bubbles and labels aligned throughout the simulation.
+        // Tick function to update circle and label positions
         function ticked() {
             circles
                 .attr("cx", d => d.x)
@@ -178,18 +145,11 @@ function truncateText(text, maxLength) {
                 .attr("x", d => d.x)
                 .attr("y", d => d.y);
         }
-    
-// ******************************************************************
-//   }).catch(function (error) {
-//     console.error("Error loading the CSV file:", error);
-//   });
-// ******************************************************************
 
-    
-    
+    }).catch(function (error) {
+        console.error("Error loading the CSV file:", error);
+    });
 }
 
-
-//This event listener ensures onPageLoaded runs only after the DOM is fully loaded, 
-//effectively preventing premature execution.
+// Event listener to ensure onPageLoaded runs once the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", onPageLoaded);
