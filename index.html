@@ -1,42 +1,51 @@
+ <!--- Declares the document type as HTML5 --->
 <!DOCTYPE html>
-<html lang="en">
+
+<!---Starts the HTML document and sets the language to English--->
+  <html lang="en">
+    
+<!--- Section --->
     <head>
-          <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>DAVI Projekt</title>
-        <link rel="stylesheet" href="styles.css" />
-        <script src="script.js"></script>
+                
+<!---Specifies the character encoding as UTF-8, which supports a wide range of characters--->    
+       <meta charset="UTF-8">
+        
+<!---Ensures the webpage is responsive on different devices by setting the viewport to the device’s width--->    
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+<!---Sets the title of the webpage to "DAVI Projekt," which appears on the browser tab--->
+       <title>DAVI Projekt</title>
+        
+<!---Links to an external CSS file called styles.css--->
+       <link rel="stylesheet" href="styles.css" />
+        
+<!---Loads the main JavaScript file (script.js) for custom scripting--->
+       <script src="script.js"></script>
+        
+<!---Loads the D3.js library, which is used for data visualization--->
        <script src="lib/d3.min.js"></script>
         
-        <style>
-    body {
-        background-image: url('images/Background.jpg'); /* Adjust path if necessary */
-        background-size: cover; /* Ensures the background covers the entire viewport */
-        background-repeat: no-repeat; /* Prevents tiling */
-        background-attachment: fixed; /* Keeps the background fixed while scrolling */
-    }
-</style>
-
-        
     </head>
-   
-    <body onload="onPageLoaded()">
+      
+<!---The onload attribute triggers the onPageLoaded function from script.js when the page finishes loading--->
+        <body onload="onPageLoaded()">
         
     
-           
+<!---Main Div--->
         <div id="mainDiv">
-            <img id="logo" alt="Spotify Logo" src="images/Spotify_Primary_Logo_RGB_Green.png" />
-
+            
+<!--- Logo Image , Displays a Spotify logo image inside mainDiv --->
+        <img id="logo" alt="Spotify Logo" src="images/Spotify_Primary_Logo_RGB_Green.png" />
+            
+<!---Displays the title and subtitle of the project--->
             <div id="MainText">
                 DAVI Project
                 <h1>What’s Hot on Spotify: Song Popularity Insights</h1>
-                
-   <!--           <span>Klicken Sie hier, um dieses &lt;span&gt; in der HTML-Datei zu finden<br /></span><br />    -->
             </div>
             
- 
-    <!------------------------------ Embed YouTube Video as Audio ------------------------------>
-            <iframe
+<!---Embed YouTube Video as Audio--->
+        <iframe
+                
     width="400"
     height="280"
     src="https://www.youtube.com/embed/X-yIEMduRXk?autoplay=1&loop=1&playlist=X-yIEMduRXk"
@@ -44,12 +53,13 @@
     allow="autoplay"
     allowfullscreen
     title="Background Music from YouTube">
+            
             </iframe>            
-        </div>
+            
+            </div>
         
     
-     <!-------------------------------- shooting star ------------------------------>
-        
+<!---Shooting Star Animation--->
       <div class="night">
         <div class="shooting_star">
             <div class="shooting_star"></div>
@@ -61,48 +71,17 @@
         </div>
     </div>
         
-        
-        
-             <!-------------------------------- CSV file ------------------------------>
-
-        
-        
-    <!-- CSV Data Visualization Section -->
+<!---CSV Data Visualization Section, 
+ Contains a header and a <div> (#chart) 
+ where the data visualization charts 
+ (like the bar chart or bubble chart) are rendered--->
     <h1>Spotify Data Visualization</h1>
     <div id="chart"></div>
+            
+            
+            
+            <button id="filterButton">Filter Popular Tracks</button>
 
-    <script>
-        // Load your CSV file
-        d3.csv("data/spotify-2023--Cleaned-DAVI-Project.csv").then(function(data) {
-            console.log("Data loaded:", data);
-
-            // Example: Display the first 5 rows in the console
-            data.slice(0, 5).forEach(row => {
-                console.log(row);
-            });
-
-            // Example Visualization: Simple Bar Chart (modify based on your data)
-            const svg = d3.select("#chart")
-                .append("svg")
-                .attr("width", 800)
-                .attr("height", 400);
-
-            // Example: Using a column named 'Popularity' for bar chart heights
-            const barWidth = 40;
-            const xSpacing = 10;
-            svg.selectAll("rect")
-                .data(data)
-                .enter()
-                .append("rect")
-                .attr("x", (d, i) => i * (barWidth + xSpacing))
-                .attr("y", d => 400 - parseInt(d.Popularity)) // Replace 'Popularity' with your actual column name
-                .attr("width", barWidth)
-                .attr("height", d => parseInt(d.Popularity))
-                .attr("fill", "steelblue");
-        }).catch(function(error) {
-            console.error("Error loading the CSV file:", error);
-        });
-    </script>
         
 </body>
         
