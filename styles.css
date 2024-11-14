@@ -71,12 +71,20 @@ img {
     text-align: center !important;
 }
 
-h1 {
+  h1 {
     font-size: 2.25rem;
-    font-weight: 500;
-    line-height: 1.2;
-    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
+
+
+h2{ background-color:#090b2bef;
+ }
+
+h2 {
+    text-align: center;
+}
+
 
 /* Background Animation */
 @keyframes Animation {
