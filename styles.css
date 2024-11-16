@@ -1,4 +1,3 @@
-
 /* Smooth Scrolling Behavior */
 html {
     scroll-behavior: smooth;
@@ -8,12 +7,17 @@ html {
 body {
     background: #000a2e;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     background-image: url('images/Background.jpg'); /* Adjust path if necessary */
     background-size: cover; /* Ensures the background covers the entire viewport */
     background-repeat: no-repeat; /* Prevents tiling */
     background-attachment: fixed; /* Keeps the background fixed while scrolling */
+    min-height: 100vh;
+    color: #ffffff;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
 /* Image Reset */
@@ -25,23 +29,21 @@ img {
 /* Main Div Styling */
 #mainDiv {
     color: #ffffffef;
-    position: relative; /* Keep this as relative */
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 5vh;
-    z-index: 8;
     text-align: center;
 }
 
 /* Logo Styling */
 #logo {
-    height: 20vh; /* Adjust the height if necessary */
+    height: 20vh;
     max-width: 100%;
     margin-bottom: 20px;
 }
-
 
 /* Responsive Styling */
 @media screen and (max-width: 720px) {
@@ -56,21 +58,22 @@ img {
 /* Main Text Styling */
 #MainText {
     color: #29f95a;
-    text-align: center !important;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 h1 {
-    font-size: 2.25rem;
+    font-size: 2.5rem;
     margin-bottom: 1.5rem;
-    text-align: center;
 }
 
 h2 {
-    background-color: #090b2bef;
+    background-color: rgba(9, 11, 46, 0.85);
     color: #ffffff;
     padding: 10px;
     text-align: center;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 /* Navigation Menu Styling */
@@ -78,7 +81,7 @@ nav {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 nav a {
@@ -96,11 +99,13 @@ nav a:hover {
 
 /* Section Styling */
 section {
-    margin: 40px 0;
+    margin: 20px 0;
     padding: 20px;
     background: rgba(9, 11, 46, 0.85);
     border-radius: 10px;
     color: #d2e1f0;
+    max-width: 90%;
+    width: 900px;
 }
 
 section p {
@@ -131,25 +136,53 @@ table img {
     border-radius: 4px;
     pointer-events: none;
     opacity: 0;
+    z-index: 10;
+    transition: opacity 0.3s ease-in-out;
 }
 
 /* Chart Div Styling */
-#chart {
-    width: 100%;
-    height: 400px;
-    background-color: rgba(0, 0, 255, 0); /* Transparent background */
-    margin-top: 20px;
+#barChart, #bubbleChart {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Bubble Chart Circle and Text Styling */
 circle {
-    transition: fill 0.3s, r 0.3s; /* Smooth transition for hover */
+    transition: fill 0.3s;
+}
+
+circle:hover {
+    fill: orange;
 }
 
 text {
     font-size: 10px;
     fill: white;
     text-anchor: middle;
+}
+
+/* Button Styling */
+#filterButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #29f95a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#filterButton:hover {
+    background-color: #1ab451;
 }
 
 /* Shooting Star Animation */
@@ -194,20 +227,27 @@ text {
     border: 0;
 }
 
-/* Button Styling */
-#filterButton {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 1em;
-    color: #ffffff;
-    background-color: #29f95a;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+/* Responsive Design for Small Screens */
+@media (max-width: 768px) {
+    section {
+        width: 95%;
+    }
 
-#filterButton:hover {
-    background-color: #1ab451;
+    nav a {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+    #barChart, #bubbleChart {
+        width: 95%;
+        padding: 15px;
+    }
+
+    #MainText {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
 }

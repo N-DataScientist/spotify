@@ -8,148 +8,143 @@ function onPageLoaded() {
 function loadAndVisualizeCSV() {
     const csvFilePath = "data/spotify-2023--Cleaned-DAVI-Project.csv";
 
-    // Load the CSV file using d3.csv with autoType to convert numbers correctly
+    // Load the CSV file using d3.csv
     d3.csv(csvFilePath, d3.autoType).then(function (data) {
-        console.log("Data loaded", data);
+        console.log("Data loaded:", data);
 
-        // Set up the bar chart SVG
-        const svgBar = d3.select("#chart")
-            .append("svg")
-            .attr("width", 800)
-            .attr("height", 400);
-
-        const barWidth = 40;
-        const xSpacing = 10;
-
-        // Tooltip for bar chart
-        const tooltip = d3.select("body")
-            .append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
-
-        // Function to update the bar chart
-        function updateBars(data) {
-            svgBar.selectAll("rect")
-                .data(data)
-                .join("rect")
-                .attr("x", (d, i) => i * (barWidth + xSpacing))
-                .attr("y", d => 400 - parseInt(d.Popularity))
-                .attr("width", barWidth)
-                .attr("height", d => parseInt(d.Popularity))
-                .attr("fill", "steelblue")
-                .on("mouseover", function (event, d) {
-                    tooltip
-                        .style("opacity", 1)
-                        .html(`<strong>Popularity:</strong> ${d.Popularity}<br><strong>Song:</strong> ${d["Track Name"]}`)
-                        .style("left", `${event.pageX + 10}px`)
-                        .style("top", `${event.pageY - 20}px`);
-                    d3.select(this).attr("fill", "orange");
-                })
-                .on("mousemove", function (event) {
-                    tooltip
-                        .style("left", `${event.pageX + 10}px`)
-                        .style("top", `${event.pageY - 20}px`);
-                })
-                .on("mouseout", function () {
-                    tooltip.style("opacity", 0);
-                    d3.select(this).attr("fill", "steelblue");
-                });
+        // Check if data contains the necessary fields
+        if (!data.length || !data[0]["Track Name"] || !data[0].Streams || !data[0].Popularity) {
+            console.error("CSV file is missing required columns.");
+            return;
         }
 
-        // Initial render of the bar chart
-        updateBars(data);
+        // Visualize the bar chart
+        createBarChart(data);
 
-        // Filter functionality for bar chart
-        const filterButton = document.getElementById("filterButton");
-        if (filterButton) {
-            filterButton.addEventListener("click", function () {
-                const filteredData = data.filter(d => parseInt(d.Popularity) > 50);
-                updateBars(filteredData);
-            });
-        } else {
-            console.warn("Warning: 'filterButton' element not found in the HTML.");
-        }
-
-        // Set up the bubble chart SVG
-        const svgBubble = d3.select("#chart")
-            .append("svg")
-            .attr("width", 800)
-            .attr("height", 600);
-
-        // Radius scale for bubble chart
-        const radiusScale = d3.scaleSqrt()
-            .domain([0, d3.max(data, d => d.Streams)])
-            .range([10, 50]);
-
-        // Tooltip for bubble chart
-        const bubbleTooltip = d3.select("body")
-            .append("div")
-            .attr("class", "bubble-tooltip")
-            .style("opacity", 0);
-
-        // D3 force simulation for bubbles
-        const simulation = d3.forceSimulation(data)
-            .force("charge", d3.forceManyBody().strength(-30))
-            .force("center", d3.forceCenter(400, 300))
-            .force("collision", d3.forceCollide().radius(d => radiusScale(d.Streams) + 2))
-            .on("tick", ticked);
-
-        // Create circles for each data point in bubble chart
-        const circles = svgBubble.selectAll("circle")
-            .data(data)
-            .enter()
-            .append("circle")
-            .attr("r", d => radiusScale(d.Streams))
-            .attr("fill", "steelblue")
-            .on("mouseover", function (event, d) {
-                bubbleTooltip
-                    .style("opacity", 1)
-                    .html(`<strong>Artist:</strong> ${d["Artist(S) Name"]}<br><strong>Streams:</strong> ${d.Streams}`)
-                    .style("left", `${event.pageX + 10}px`)
-                    .style("top", `${event.pageY - 20}px`);
-                d3.select(this).attr("fill", "orange");
-            })
-            .on("mousemove", function (event) {
-                bubbleTooltip
-                    .style("left", `${event.pageX + 10}px`)
-                    .style("top", `${event.pageY - 20}px`);
-            })
-            .on("mouseout", function () {
-                bubbleTooltip.style("opacity", 0);
-                d3.select(this).attr("fill", "steelblue");
-            });
-
-        // Add text labels inside each bubble
-        const labels = svgBubble.selectAll("text")
-            .data(data)
-            .enter()
-            .append("text")
-            .text(d => truncateText(d["Track Name"], 10)) // Limit to 10 characters
-            .attr("text-anchor", "middle")
-            .attr("dy", 4)
-            .attr("fill", "white")
-            .style("font-size", d => `${Math.max(10, radiusScale(d.Streams) / 3)}px`);
-
-        // Helper function to truncate text if too long
-        function truncateText(text, maxLength) {
-            return text.length > maxLength ? text.slice(0, maxLength) + '…' : text;
-        }
-
-        // Tick function to update circle and label positions
-        function ticked() {
-            circles
-                .attr("cx", d => d.x)
-                .attr("cy", d => d.y);
-
-            labels
-                .attr("x", d => d.x)
-                .attr("y", d => d.y);
-        }
-
+        // Visualize the bubble chart
+        createBubbleChart(data);
     }).catch(function (error) {
         console.error("Error loading the CSV file:", error);
     });
 }
 
-// Event listener to ensure onPageLoaded runs once the DOM is fully loaded
+// Function to create a bar chart
+function createBarChart(data) {
+    const svgWidth = 800, svgHeight = 400;
+    const margin = { top: 20, right: 30, bottom: 120, left: 50 };
+    const width = svgWidth - margin.left - margin.right;
+    const height = svgHeight - margin.top - margin.bottom;
+
+    const svg = d3.select("#barChart")
+        .append("svg")
+        .attr("width", svgWidth)
+        .attr("height", svgHeight);
+
+    const chartGroup = svg.append("g")
+        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+    // Create scales
+    const x = d3.scaleBand()
+        .domain(data.slice(0, 10).map(d => d["Track Name"]))
+        .range([0, width])
+        .padding(0.2);
+
+    const y = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.Streams)])
+        .nice()
+        .range([height, 0]);
+
+    // Add axes
+    chartGroup.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(d3.axisBottom(x).tickFormat(d => d.length > 10 ? `${d.slice(0, 10)}...` : d))
+        .selectAll("text")
+        .attr("transform", "rotate(-45)")
+        .style("text-anchor", "end");
+
+    chartGroup.append("g")
+        .call(d3.axisLeft(y));
+
+    // Add bars
+    chartGroup.selectAll(".bar")
+        .data(data.slice(0, 10))
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", d => x(d["Track Name"]))
+        .attr("y", d => y(d.Streams))
+        .attr("width", x.bandwidth())
+        .attr("height", d => height - y(d.Streams))
+        .attr("fill", "steelblue")
+        .on("mouseover", function (event, d) {
+            d3.select("#tooltip")
+                .style("opacity", 1)
+                .html(`<strong>${d["Track Name"]}</strong><br>Streams: ${d.Streams}`)
+                .style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY - 20}px`);
+            d3.select(this).attr("fill", "orange");
+        })
+        .on("mousemove", function (event) {
+            d3.select("#tooltip")
+                .style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY - 20}px`);
+        })
+        .on("mouseout", function () {
+            d3.select("#tooltip").style("opacity", 0);
+            d3.select(this).attr("fill", "steelblue");
+        });
+}
+
+// Function to create a bubble chart
+function createBubbleChart(data) {
+    const svgWidth = 800, svgHeight = 600;
+
+    const svg = d3.select("#bubbleChart")
+        .append("svg")
+        .attr("width", svgWidth)
+        .attr("height", svgHeight);
+
+    const radiusScale = d3.scaleSqrt()
+        .domain([0, d3.max(data, d => d.Streams)])
+        .range([10, 50]);
+
+    const simulation = d3.forceSimulation(data)
+        .force("x", d3.forceX(svgWidth / 2).strength(0.05))
+        .force("y", d3.forceY(svgHeight / 2).strength(0.05))
+        .force("collision", d3.forceCollide(d => radiusScale(d.Streams) + 2));
+
+    const bubbles = svg.selectAll(".bubble")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("class", "bubble")
+        .attr("r", d => radiusScale(d.Streams))
+        .attr("fill", "steelblue")
+        .on("mouseover", function (event, d) {
+            d3.select("#tooltip")
+                .style("opacity", 1)
+                .html(`<strong>${d["Track Name"]}</strong><br>Streams: ${d.Streams}`)
+                .style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY - 20}px`);
+            d3.select(this).attr("fill", "orange");
+        })
+        .on("mousemove", function (event) {
+            d3.select("#tooltip")
+                .style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY - 20}px`);
+        })
+        .on("mouseout", function () {
+            d3.select("#tooltip").style("opacity", 0);
+            d3.select(this).attr("fill", "steelblue");
+        });
+
+    simulation.nodes(data)
+        .on("tick", () => {
+            bubbles
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y);
+        });
+}
+
+// Ensure the function runs once the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", onPageLoaded);

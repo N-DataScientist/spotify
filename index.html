@@ -1,379 +1,189 @@
- <!--- Declares the document type as HTML5 --->
 <!DOCTYPE html>
+<html lang="en">
 
-<!---Starts the HTML document and sets the language to English--->
-  <html lang="en">
-    
-<!--- Section --->
-    <head>
-                
-<!---Specifies the character encoding as UTF-8, which supports a wide range of characters--->    
-       <meta charset="UTF-8">
-        
-<!---Ensures the webpage is responsive on different devices by setting the viewport to the device’s width--->    
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-<!---Sets the title of the webpage to "DAVI Projekt," which appears on the browser tab--->
-       <title>DAVI Projekt</title>
-  
-<!---Einbindung von W3.CSS über die absolute URL--->
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
-        
-<!---Links to an external CSS file called styles.css--->
-       <link rel="stylesheet" href="styles.css" />
-        
-<!---Load D3.js and color palette--->
-    <script src="https://d3js.org/d3.v4.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-        
-<!---Loads the main JavaScript file (script.js) for custom scripting--->
-       <script src="script.js"></script>
-        
-<!---Loads the D3.js library, which is used for data visualization--->
-       <script src="lib/d3.min.js"></script>
-        
-<!---Additional Styles--->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAVI Projekt</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
     <style>
-      .node:hover {
-          stroke-width: 7px !important;
-          opacity: 1 !important;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        #mainDiv {
+            text-align: center;
+        }
+
+        #chartContainer {
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        .tooltip {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 5px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .bar {
+            fill: steelblue;
+            transition: fill 0.3s;
+        }
+
+        .bar:hover {
+            fill: orange;
+        }
+
+        circle {
+            fill: steelblue;
+            transition: fill 0.3s;
+        }
+
+        circle:hover {
+            fill: orange;
+        }
+
+        #filterButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #filterButton:hover {
+            background-color: #0056b3;
+        }
     </style>
-        
-        
-    </head>
-      
-      
-      
-<!---The onload attribute triggers the onPageLoaded function from script.js when the page finishes loading--->
-        <body onload="onPageLoaded()">
-        
-    
-             <main class="container">
-<!---Main Div--->
+</head>
+
+<body onload="onPageLoaded()">
+    <main class="container">
         <div id="mainDiv">
- <!---       <main class="container">      --->
-            
-<!--- Logo Image , Displays a Spotify logo image inside mainDiv --->
-        <img id="logo" alt="Spotify Logo" src="images/Spotify_Primary_Logo_RGB_Green.png" />
-            
-<!---Displays the title and subtitle of the project--->
+            <!-- Logo and Title -->
+            <img id="logo" alt="Spotify Logo" src="images/Spotify_Primary_Logo_RGB_Green.png">
             <div id="MainText">
-                DAVI Project
-                <h1>What’s Hot on Spotify: Song Popularity Insights</h1>
+                <h1>DAVI Project</h1>
+                <h2>What’s Hot on Spotify: Song Popularity Insights</h2>
             </div>
-            
-            
- <!---section--->
-             <section>
-            <!--nav-->
-         <nav>
-    <a href="#BackgroundInformation">Background Information</a>
-    <a href="#DataSources">Data Sources</a>
-    <a href="#DataVisualization">Data Visualization</a>
-    <a href="#VisualDesignChoices">Visual Design Choices</a>
-    <a href="#References">References</a>
-    <a href="#Team">Team</a>
-         </nav>
 
-        </section>
-            
+            <!-- Navigation -->
+            <section>
+                <nav>
+                    <a href="#BackgroundInformation">Background Information</a>
+                    <a href="#DataSources">Data Sources</a>
+                    <a href="#DataVisualization">Data Visualization</a>
+                    <a href="#VisualDesignChoices">Visual Design Choices</a>
+                    <a href="#References">References</a>
+                    <a href="#Team">Team</a>
+                </nav>
+            </section>
 
-            
-            
- <!---section Background Information--->            
-             <section>
-            <h2 id="BackgroundInformation">Background Information</h2>
-            <p>  
-                This project explores global music consumption trends using Spotify's "Top Songs 2023" dataset. 
-                It analyzes musical features like beats per minute (bpm), valence (positivity), and word count 
-                to uncover what defines popular music.
-                <br />
-                 By examining data trends and creating interactive visualizations, this project aims to offer 
-                 insights into evolving musical preferences.
-            </p>
-            <!--Bilder hinzuefugen-->
-            <table>
-                <tr>
-                    <td><img src="images/Background_1.png" alt="Most Streamed Spotify Songs 2023 Dataset on Kaggle" style="width:70%"></td>
-                </tr>
-            </table>
+            <!-- Background Information Section -->
+            <section>
+                <h2 id="BackgroundInformation">Background Information</h2>
+                <p>
+                    This project explores global music consumption trends using Spotify's "Top Songs 2023" dataset.
+                    It analyzes musical features like beats per minute (bpm), valence (positivity), and word count
+                    to uncover what defines popular music.
+                </p>
+                <img src="images/Background_1.png" alt="Most Streamed Spotify Songs 2023 Dataset on Kaggle" style="width:70%;">
+            </section>
 
-                 </section>
+            <!-- Data Sources Section -->
+            <section>
+                <h2 id="DataSources">Data Sources</h2>
+                <p>
+                    <strong>Dataset Name:</strong> Top Spotify Songs 2023<br>
+                    <strong>Source:</strong> Kaggle Dataset<br>
+                    <strong>Description:</strong> Contains 24 columns detailing tracks, artists, release year/month,
+                    bpm, key, mode, valence, and speechiness.<br>
+                    <strong>Reason for Selection:</strong> High-quality dataset with comprehensive details and high user rating.
+                </p>
+                <img src="Background_1.jpg" alt="Most Streamed Spotify Songs 2023 Dataset on Kaggle" style="width:100%;">
+            </section>
 
- <!---section Data Sources--->            
-             <section>
-            <h2 id="DataSources">Data Sources</h2>
-            <p>  <strong>Dataset Name:</strong> Top Spotify Songs 2023<br>
-                 <strong>Source:</strong> Kaggle Dataset<br>
-                 <strong>Description:</strong> Contains 24 columns detailing tracks, artists, release year/month, 
-                 bpm, key, mode, valence, and speechiness.<br>
-                 <strong>Reason for Selection:</strong> High-quality dataset with comprehensive details and 
-                 high user rating.
-            </p>
-            <!--Bilder hinzuefugen-->
+            <!-- Data Visualization Section -->
+            <section>
+                <h2 id="DataVisualization">Data Visualization</h2>
+                <p>
+                    Interactive visualizations were created to address key research questions:
+                    <br> Trends in beats per minute (bpm) over time.
+                    <br> Positivity levels of the most streamed songs.
+                    <br> Impact of release month on popularity.
+                    <br> Ideal word count for popular songs.
+                </p>
+                <!-- Bar Chart -->
+                <h3>Bar Chart: Top Tracks by Streams</h3>
+                <div id="barChart"></div>
 
-            <table>
-                <tr>
-                    <td><img src="Background_1.jpg" alt="Most Streamed Spotify Songs 2023 Dataset on Kaggle" style="width:100%"></td>
-                </tr>
-            </table>
-                 
-                </section>
-            
- <!---section Data Visualization--->            
-             <section>
-            <h2 id="DataVisualization">Data Visualization</h2>
-            <p>   Interactive visualizations were created to address key research questions:
-                <br />
-                 Trends in beats per minute (bpm) over time.
-                <br />
-                Positivity levels of the most streamed songs.              
-                <br />
-                Impact of release month on popularity.
-                <br />
-                Ideal word count for popular songs.
-            </p>
-            <!--Bilder hinzuefugen-->
+                <!-- Bubble Chart -->
+                <h3>Bubble Chart: Popularity vs Streams</h3>
+                <div id="bubbleChart"></div>
 
-            <table>
-                <tr>
-                    <td><img src="Background_1.jpg" alt="Most Streamed Spotify Songs 2023 Dataset on Kaggle" style="width:100%"></td>
-                </tr>
-            </table>
-                 
-                </section>
-            
- <!---section Visual Design Choices--->            
-             <section>
-            <h2 id="VisualDesignChoices">Visual Design Choices</h2>
-            <p>  Visuals were designed to ensure clarity and accessibility:
-                <br />
-                 Visual Design Choices
-                <br />
-                Visual Design Choices              
-                <br />
-                Visual Design Choices
-            </p>
-            <!--Bilder hinzuefugen-->
+                <!-- Tooltip -->
+                <div class="tooltip" id="tooltip"></div>
+            </section>
 
-            <table>
-                <tr>
-                    <td><img src="Background_1.jpg" alt="Most Streamed Spotify Songs 2023 Dataset on Kaggle" style="width:100%"></td>
-                </tr>
-            </table>
-                </section>          
-                 
- <!---section References--->            
-             <section>
-            <h2 id="References">References</h2>
-            <p>  International Federation of the Phonographic Industry: Study on Music Consumption
-                <a href="https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023" target="_blank">
-                    Kaggle Dataset: Top Spotify Songs 2023
-                </a>
-                References              
-                <br />
-                References
-            </p>
-            <!--Bilder hinzuefugen-->
+            <!-- Visual Design Choices Section -->
+            <section>
+                <h2 id="VisualDesignChoices">Visual Design Choices</h2>
+                <p>
+                    Visuals were designed to ensure clarity and accessibility:
+                    <br> Clear labels and tooltips provide insights into key data points.
+                    <br> Interactive elements allow users to explore specific patterns.
+                    <br> Consistent color schemes improve readability.
+                </p>
+                <img src="Background_1.jpg" alt="Visual Design Choices" style="width:100%;">
+            </section>
 
-            <table>
-                <tr>
-                    <td><img src="Background_1.jpg" alt="Most Streamed Spotify Songs 2023 Dataset on Kaggle" style="width:100%"></td>
-                </tr>
-            </table>
-                </section>              
-                 
-                 
- <!---section Team--->            
-             <section>
-            <h2 id="Team">Team</h2>
-                <p> 
-                     <strong> Group 11 </strong>
-                <br />
-                <br />
-                Marco Mathis
-                <br />
-                Wirtschaftsinformatik
-                <br />
-                Major: Data Engineering & Data Science
-                <br />
-                7. Semester
-                <br />
-                <br />
-                <br />
-                Nouf Alqahtani
-                <br />
-                Wirtschaftsinformatik
-                <br />
-                Major: Data Engineering & Data Science
-                <br />
-                6. Semester
-            </p>
-            <!--Bilder hinzuefugen-->
+            <!-- References Section -->
+            <section>
+                <h2 id="References">References</h2>
+                <p>
+                    <a href="https://www.kaggle.com/datasets/nelgiriyewithana/top-spotify-songs-2023" target="_blank">
+                        Kaggle Dataset: Top Spotify Songs 2023
+                    </a>
+                </p>
+                <img src="Background_1.jpg" alt="References" style="width:100%;">
+            </section>
 
-            <table>
-                <tr>
-                    <td><img src="Background_1.jpg" alt="Most Streamed Spotify Songs 2023 Dataset on Kaggle" style="width:100%"></td>
-                </tr>
-            </table>
-                </section>
-            
-<!---Embed YouTube Video as Audio--->
-        <iframe
-                
-    width="400"
-    height="280"
-    src="https://www.youtube.com/embed/X-yIEMduRXk?autoplay=1&loop=1&playlist=X-yIEMduRXk"
-    alt="Listen to Adele on YouTube"
-    allow="autoplay"
-    allowfullscreen
-    title="Background Music from YouTube">
-            
-            </iframe>            
-            
-            </div>
-        
-    
-<!---Shooting Star Animation--->
-      <div class="night">
-        <div class="shooting_star">
-            <div class="shooting_star"></div>
+            <!-- Team Section -->
+            <section>
+                <h2 id="Team">Team</h2>
+                <p>
+                    <strong>Group 11</strong>
+                    <br> Marco Mathis
+                    <br> Wirtschaftsinformatik
+                    <br> Major: Data Engineering & Data Science
+                    <br><br> Nouf Alqahtani
+                    <br> Wirtschaftsinformatik
+                    <br> Major: Data Engineering & Data Science
+                </p>
+                <img src="Background_1.jpg" alt="Team" style="width:100%;">
+            </section>
         </div>
-    </div>
-    <div class="night">
-        <div class="shooting_star">
-            <div class="shooting_star"></div>
-        </div>
-    </div>
-                 
-                 
- <!-- New Visualization Section for D3.js -->
-            <div id="my_dataviz"></div> <!-- New div for D3 visualization -->
-        
-<!---CSV Data Visualization Section, 
- Contains a header and a <div> (#chart) 
- where the data visualization charts 
- (like the bar chart or bubble chart) are rendered--->
-    <h1>Spotify Data Visualization</h1>
-    <div id="chart"></div>
-            
-            
-            
-            <button id="filterButton">Filter Popular Tracks</button>
+    </main>
 
- 
-
-    </main> <!-- Closing the main.container wrapper -->
-            
-        <!-- D3 Visualization Script -->
-    <script>
-        // set the dimensions and margins of the graph
-        var width = 460
-        var height = 460
-
-        // append the svg object to the body of the page
-        var svg = d3.select("#my_dataviz")
-          .append("svg")
-            .attr("width", width)
-            .attr("height", height)
-
-        // Read data
-        d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/11_SevCatOneNumNestedOneObsPerGroup.csv", function(data) {
-
-          // Filter a bit the data -> more than 1 million inhabitants
-          data = data.filter(function(d){ return d.value>10000000 })
-
-          // Color palette for continents
-          var color = d3.scaleOrdinal()
-            .domain(["Asia", "Europe", "Africa", "Oceania", "Americas"])
-            .range(d3.schemeSet1);
-
-          // Size scale for countries
-          var size = d3.scaleLinear()
-            .domain([0, 1400000000])
-            .range([7,55])  // circle will be between 7 and 55 px wide
-
-          // create a tooltip
-          var Tooltip = d3.select("#my_dataviz")
-            .append("div")
-            .style("opacity", 0)
-            .attr("class", "tooltip")
-            .style("background-color", "white")
-            .style("border", "solid")
-            .style("border-width", "2px")
-            .style("border-radius", "5px")
-            .style("padding", "5px")
-
-          // Three functions for tooltip
-          var mouseover = function(d) {
-            Tooltip
-              .style("opacity", 1)
-          }
-          var mousemove = function(d) {
-            Tooltip
-              .html('<u>' + d.key + '</u>' + "<br>" + d.value + " inhabitants")
-              .style("left", (d3.mouse(this)[0]+20) + "px")
-              .style("top", (d3.mouse(this)[1]) + "px")
-          }
-          var mouseleave = function(d) {
-            Tooltip
-              .style("opacity", 0)
-          }
-
-          // Initialize the circle: all located at the center of the svg area
-          var node = svg.append("g")
-            .selectAll("circle")
-            .data(data)
-            .enter()
-            .append("circle")
-              .attr("class", "node")
-              .attr("r", function(d){ return size(d.value)})
-              .attr("cx", width / 2)
-              .attr("cy", height / 2)
-              .style("fill", function(d){ return color(d.region)})
-              .style("fill-opacity", 0.8)
-              .attr("stroke", "black")
-              .style("stroke-width", 1)
-              .on("mouseover", mouseover) 
-              .on("mousemove", mousemove)
-              .on("mouseleave", mouseleave)
-              .call(d3.drag() 
-                   .on("start", dragstarted)
-                   .on("drag", dragged)
-                   .on("end", dragended));
-
-          // Forces applied to the nodes
-          var simulation = d3.forceSimulation()
-              .force("center", d3.forceCenter().x(width / 2).y(height / 2)) 
-              .force("charge", d3.forceManyBody().strength(.1)) 
-              .force("collide", d3.forceCollide().strength(.2).radius(function(d){ return (size(d.value)+3) }).iterations(1))
-
-          simulation
-              .nodes(data)
-              .on("tick", function(d){
-                node
-                    .attr("cx", function(d){ return d.x; })
-                    .attr("cy", function(d){ return d.y; })
-              });
-
-          // Drag functions
-          function dragstarted(d) {
-            if (!d3.event.active) simulation.alphaTarget(.03).restart();
-            d.fx = d.x;
-            d.fy = d.y;
-          }
-          function dragged(d) {
-            d.fx = d3.event.x;
-            d.fy = d3.event.y;
-          }
-          function dragended(d) {
-            if (!d3.event.active) simulation.alphaTarget(.03);
-            d.fx = null;
-            d.fy = null;
-          }
-        });
-    </script>
+    <!-- Link to external JS file -->
+    <script src="script.js"></script>
 </body>
-        
+
 </html>
