@@ -5,61 +5,24 @@ html {
 
 /* General Body Styling */
 body {
+    font-family: Arial, sans-serif;
     background: #000a2e;
+    background-image: url('images/Background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #ffffff;
+    margin: 0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background-image: url('images/Background.jpg'); /* Adjust path if necessary */
-    background-size: cover; /* Ensures the background covers the entire viewport */
-    background-repeat: no-repeat; /* Prevents tiling */
-    background-attachment: fixed; /* Keeps the background fixed while scrolling */
-    min-height: 100vh;
-    color: #ffffff;
-    margin: 0;
-    font-family: Arial, sans-serif;
 }
 
-/* Image Reset */
-img {
-    vertical-align: middle;
-    border-style: none;
-}
-
-/* Main Div Styling */
-#mainDiv {
-    color: #ffffffef;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5vh;
+/* Headings Styling */
+h1, h2 {
     text-align: center;
-}
-
-/* Logo Styling */
-#logo {
-    height: 20vh;
-    max-width: 100%;
-    margin-bottom: 20px;
-}
-
-/* Responsive Styling */
-@media screen and (max-width: 720px) {
-    #mainDiv {
-        top: 40%;
-    }
-    #logo {
-        height: 130px;
-    }
-}
-
-/* Main Text Styling */
-#MainText {
-    color: #29f95a;
-    text-align: center;
-    margin-bottom: 30px;
 }
 
 h1 {
@@ -74,6 +37,45 @@ h2 {
     text-align: center;
     border-radius: 5px;
     margin-bottom: 20px;
+}
+
+/* Main Div Styling */
+#mainDiv {
+    text-align: center;
+    margin-top: 5vh;
+    color: #ffffffef;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Logo Styling */
+#logo {
+    height: 20vh;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Chart Container */
+#chartContainer {
+    width: 90%;
+    margin: 20px auto;
+}
+
+/* Tooltip Styling */
+.tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 10;
+    transition: opacity 0.3s ease-in-out;
 }
 
 /* Navigation Menu Styling */
@@ -113,47 +115,31 @@ section p {
     color: #b0bec5;
 }
 
-/* Table Styling for Images */
-table {
-    width: 100%;
-    margin-top: 20px;
-    text-align: center;
-}
-
-table img {
-    max-width: 70%;
-    border-radius: 8px;
-}
-
-/* Tooltip Styling */
-.tooltip {
-    position: absolute;
-    text-align: center;
-    padding: 5px;
-    font-size: 12px;
-    background: lightgray;
-    border: 1px solid #333;
-    border-radius: 4px;
-    pointer-events: none;
-    opacity: 0;
-    z-index: 10;
-    transition: opacity 0.3s ease-in-out;
-}
-
-/* Chart Div Styling */
+/* Chart Styling */
 #barChart, #bubbleChart {
     margin: 20px auto;
     width: 90%;
     max-width: 800px;
     height: 500px;
-    background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Bubble Chart Circle and Text Styling */
+/* Bar Chart Hover Effects */
+.bar {
+    fill: steelblue;
+    transition: fill 0.3s;
+}
+
+.bar:hover {
+    fill: orange;
+}
+
+/* Bubble Chart Styling */
 circle {
+    fill: steelblue;
     transition: fill 0.3s;
 }
 
@@ -183,6 +169,60 @@ text {
 
 #filterButton:hover {
     background-color: #1ab451;
+}
+
+/* Team Section Styling */
+.team-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.team-member {
+    background-color: rgba(255, 255, 255, 0.1);
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    flex: 1 1 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.team-member img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #ddd;
+}
+
+.team-member p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #fff;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+table img {
+    max-width: 70%;
+    border-radius: 8px;
 }
 
 /* Shooting Star Animation */
@@ -220,13 +260,6 @@ text {
     }
 }
 
-/* Embedded Video Styling */
-.video {
-    height: 100%;
-    width: 100%;
-    border: 0;
-}
-
 /* Responsive Design for Small Screens */
 @media (max-width: 768px) {
     section {
@@ -249,5 +282,14 @@ text {
 
     h2 {
         font-size: 1.25rem;
+    }
+
+    .team-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .team-member {
+        max-width: 100%;
     }
 }

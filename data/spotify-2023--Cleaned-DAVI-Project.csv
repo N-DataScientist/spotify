@@ -1,4 +1,4 @@
-﻿Artist_Name;In_Deezer_Playlists;Key;Mode;Released_Day;Released_Month;Released_Year;Track_Name;Acousticness_in_percent;Artist_Count;Bpm;Danceability_in_percent;Energy_in_percent;In_Apple_Charts;In_Apple_Playlists;In_Deezer_Charts;In_Shazam_Charts;In_Spotify_Charts;In_Spotify_Playlists;Instrumentalness_in_percent;Liveness_in_percent;Speechiness_in_percent;Streams;Valence_in_percent
+﻿artist(s)_name;in_deezer_playlists;key;mode;released_day;released_month;released_year;track_name;acousticness_in_percent;artist_count;bpm;danceability_in_percent;energy_in_percent;in_apple_charts;in_apple_playlists;in_deezer_charts;in_shazam_charts;in_spotify_charts;in_spotify_playlists;instrumentalness_in_percent;liveness_in_percent;speechiness_in_percent;streams;valence_in_percent
 (G)I-DLE;7;E;Minor;15;5;2023;Queencard;3;1;130;82;83;126;10;0;148;33;451;0;27;5;96273746;69
 (G)I-DLE;9;E;Minor;17;10;2022;Nxde;4;1;136;73;91;116;14;0;11;6;430;0;48;18;170709584;65
 21 Savage, Gunna;5;C#;Major;7;1;2022;thought i was playing;0;2;148;68;73;0;3;0;0;0;807;0;7;7;60680939;29

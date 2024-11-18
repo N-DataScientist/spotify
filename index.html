@@ -5,73 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DAVI Projekt</title>
+    
+ <!-- CSS -->  
+    <!-- CSS-Bibliothek von W3Schools -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Bootstrap 3 CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Lokale CSS Datei -->
     <link rel="stylesheet" href="styles.css">
+    
+    
+ <!-- JS -->  
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7Q20YirclIJHBIRqCCP2aLuvKRRgDqsOAKF" crossorigin="anonymous"></script>
+    <!-- Bootstrap's JS-Komponenten (z. B. modale Fenster, Dropdowns) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- PapaParse ist eine JavaScript-Bibliothek, die CSV-Dateien in JSON-Objekte umwandelt -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Datenvisualisierung d3.js -->
     <script src="https://d3js.org/d3.v6.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
-        h1, h2 {
-            text-align: center;
-        }
 
-        #mainDiv {
-            text-align: center;
-        }
 
-        #chartContainer {
-            width: 90%;
-            margin: 20px auto;
-        }
 
-        .tooltip {
-            position: absolute;
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 5px;
-            border-radius: 5px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
 
-        .bar {
-            fill: steelblue;
-            transition: fill 0.3s;
-        }
-
-        .bar:hover {
-            fill: orange;
-        }
-
-        circle {
-            fill: steelblue;
-            transition: fill 0.3s;
-        }
-
-        circle:hover {
-            fill: orange;
-        }
-
-        #filterButton {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #filterButton:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    
+   
 </head>
 
 <body onload="onPageLoaded()">
@@ -149,7 +111,7 @@
                     Visuals were designed to ensure clarity and accessibility:
                     <br> Clear labels and tooltips provide insights into key data points.
                     <br> Interactive elements allow users to explore specific patterns.
-                    <br> Consistent color schemes improve readability.
+                    <br> Consistent color schemes improve readability. Data-Ink Ratio
                 </p>
                 <img src="Background_1.jpg" alt="Visual Design Choices" style="width:100%;">
             </section>
@@ -166,19 +128,32 @@
             </section>
 
             <!-- Team Section -->
-            <section>
-                <h2 id="Team">Team</h2>
-                <p>
-                    <strong>Group 11</strong>
-                    <br> Marco Mathis
-                    <br> Wirtschaftsinformatik
-                    <br> Major: Data Engineering & Data Science
-                    <br><br> Nouf Alqahtani
-                    <br> Wirtschaftsinformatik
-                    <br> Major: Data Engineering & Data Science
-                </p>
-                <img src="Background_1.jpg" alt="Team" style="width:100%;">
-            </section>
+<section id="team">
+    <h3>Team</h3>
+    <div class="team-container">
+        <!-- Team Member 1 -->
+        <div class="team-member">
+            <img src="images/MarcoMathis.jpg" alt="Marco Mathis">
+            <p>
+                <strong>Marco Mathis</strong><br>
+                B.Sc. in Wirtschaftsinformatik (xxxxxxxxxxx)<br>
+                Major: Data Engineering & Data Science
+            </p>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="team-member">
+            <img src="images/NoufAlqahtani.jpg" alt="Nouf Alqahtani">
+            <p>
+                <strong>Nouf Alqahtani</strong><br>
+                B.Sc. in Wirtschaftsinformatik (I.BSCWI_F22.2101)<br>
+                Major: Data Engineering & Data Science
+            </p>
+        </div>
+    </div>
+</section>
+
+
         </div>
     </main>
 
