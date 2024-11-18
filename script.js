@@ -13,7 +13,7 @@ function loadAndVisualizeCSV() {
         console.log("Data loaded:", data);
 
         // Check if data contains the necessary fields
-        if (!data.length || !data[0]["Track Name"] || !data[0].Streams || !data[0].Popularity) {
+        if (!data.length || !data[0].track_name || !data[0].streams) {
             console.error("CSV file is missing required columns.");
             return;
         }
@@ -45,12 +45,12 @@ function createBarChart(data) {
 
     // Create scales
     const x = d3.scaleBand()
-        .domain(data.slice(0, 10).map(d => d["Track Name"]))
+        .domain(data.slice(0, 10).map(d => d.track_name))
         .range([0, width])
         .padding(0.2);
 
     const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.Streams)])
+        .domain([0, d3.max(data, d => d.streams)])
         .nice()
         .range([height, 0]);
 
@@ -71,15 +71,15 @@ function createBarChart(data) {
         .enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("x", d => x(d["Track Name"]))
-        .attr("y", d => y(d.Streams))
+        .attr("x", d => x(d.track_name))
+        .attr("y", d => y(d.streams))
         .attr("width", x.bandwidth())
-        .attr("height", d => height - y(d.Streams))
+        .attr("height", d => height - y(d.streams))
         .attr("fill", "steelblue")
         .on("mouseover", function (event, d) {
             d3.select("#tooltip")
                 .style("opacity", 1)
-                .html(`<strong>${d["Track Name"]}</strong><br>Streams: ${d.Streams}`)
+                .html(`<strong>${d.track_name}</strong><br>Streams: ${d.streams}`)
                 .style("left", `${event.pageX + 10}px`)
                 .style("top", `${event.pageY - 20}px`);
             d3.select(this).attr("fill", "orange");
@@ -105,25 +105,25 @@ function createBubbleChart(data) {
         .attr("height", svgHeight);
 
     const radiusScale = d3.scaleSqrt()
-        .domain([0, d3.max(data, d => d.Streams)])
+        .domain([0, d3.max(data, d => d.streams)])
         .range([10, 50]);
 
     const simulation = d3.forceSimulation(data)
         .force("x", d3.forceX(svgWidth / 2).strength(0.05))
         .force("y", d3.forceY(svgHeight / 2).strength(0.05))
-        .force("collision", d3.forceCollide(d => radiusScale(d.Streams) + 2));
+        .force("collision", d3.forceCollide(d => radiusScale(d.streams) + 2));
 
     const bubbles = svg.selectAll(".bubble")
         .data(data)
         .enter()
         .append("circle")
         .attr("class", "bubble")
-        .attr("r", d => radiusScale(d.Streams))
+        .attr("r", d => radiusScale(d.streams))
         .attr("fill", "steelblue")
         .on("mouseover", function (event, d) {
             d3.select("#tooltip")
                 .style("opacity", 1)
-                .html(`<strong>${d["Track Name"]}</strong><br>Streams: ${d.Streams}`)
+                .html(`<strong>${d.track_name}</strong><br>Streams: ${d.streams}`)
                 .style("left", `${event.pageX + 10}px`)
                 .style("top", `${event.pageY - 20}px`);
             d3.select(this).attr("fill", "orange");
