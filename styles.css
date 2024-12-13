@@ -116,7 +116,32 @@ section p {
 }
 
 /* Chart Styling */
-#barChart, #bubbleChart {
+
+#bubbleChart {
+    margin: 20px auto;
+    width: 800px; /* Match the width of the SVG */
+    height: 600px; /* Match the height of the SVG */
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0; /* Remove unnecessary padding */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden; /* Ensure bubbles do not go outside the container */
+    position: relative; /* Keeps SVG and content aligned */
+}
+
+#filters {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#filters select {
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#barChart {
     margin: 20px auto;
     width: 90%;
     max-width: 800px;
@@ -129,7 +154,6 @@ section p {
 
 /* Bar Chart Hover Effects */
 .bar {
-    fill: steelblue;
     transition: fill 0.3s;
 }
 
@@ -139,7 +163,6 @@ section p {
 
 /* Bubble Chart Styling */
 circle {
-    fill: steelblue;
     transition: fill 0.3s;
 }
 
