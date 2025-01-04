@@ -125,6 +125,7 @@ section p {
 }
 
 /* Bar Chart Styling */
+/* Bar Chart Styling */
 #barChart1, #barChart2 {
     flex: 1;
     background-color: rgba(255, 255, 255, 0.1); /* This could affect visibility */
