@@ -7,10 +7,10 @@ html {
 body {
     font-family: Arial, sans-serif;
     background: #000a2e;
-    background-image: url('images/Background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+/*    background-image: url('images/Background.jpg');  */
+/*    background-size: cover;  */
+/*    background-repeat: no-repeat;  */
+/*    background-attachment: fixed;  */
     color: #ffffff;
     margin: 0;
     min-height: 100vh;
@@ -20,26 +20,7 @@ body {
     justify-content: flex-start;
 }
 
-/* Headings Styling */
-h1, h2 {
-    text-align: center;
-}
-
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-}
-
-h2 {
-    background-color: rgba(9, 11, 46, 0.85);
-    color: #ffffff;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-/* Main Div Styling */
+/* Main Div Styling, DAVI Project */
 #mainDiv {
     text-align: center;
     margin-top: 5vh;
@@ -52,30 +33,9 @@ h2 {
 
 /* Logo Styling */
 #logo {
-    height: 20vh;
-    max-width: 100%;
+    height: 25vh;
+    max-width: 120%;
     margin-bottom: 20px;
-}
-
-/* Chart Container */
-#chartContainer {
-    width: 90%;
-    margin: 20px auto;
-}
-
-/* Tooltip Styling */
-.tooltip {
-    position: absolute;
-    text-align: center;
-    padding: 5px;
-    font-size: 12px;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    pointer-events: none;
-    opacity: 0;
-    z-index: 10;
-    transition: opacity 0.3s ease-in-out;
 }
 
 /* Navigation Menu Styling */
@@ -83,7 +43,7 @@ nav {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 nav a {
@@ -92,22 +52,47 @@ nav a {
     padding: 8px 15px;
     border-radius: 5px;
     background-color: #1f3b4d;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 nav a:hover {
     background-color: #4d94d6;
 }
 
+/* Headings Styling */
+h1, h2 {
+    text-align: center;
+}
+
+h1 {
+    font-size: 4.7rem;
+    margin-bottom: 2.9rem;
+}
+
+h2 {
+    background-color: rgba(9, 11, 46, 0.85);
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* In styles.css */
+p {
+    font-size: 21px;
+}
+
+
 /* Section Styling */
 section {
-    margin: 20px 0;
+    margin: 20px auto;
     padding: 20px;
     background: rgba(9, 11, 46, 0.85);
     border-radius: 10px;
     color: #d2e1f0;
-    max-width: 90%;
-    width: 900px;
+    max-width: 100%;
+    width: 1500px;
 }
 
 section p {
@@ -115,20 +100,75 @@ section p {
     color: #b0bec5;
 }
 
-/* Chart Styling */
-
-#bubbleChart {
-    margin: 20px auto;
-    width: 800px; /* Match the width of the SVG */
-    height: 600px; /* Match the height of the SVG */
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 0; /* Remove unnecessary padding */
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    overflow: hidden; /* Ensure bubbles do not go outside the container */
-    position: relative; /* Keeps SVG and content aligned */
+/* Tooltip Styling */
+.tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+    background: rgba(9, 11, 46, 0.85);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 10;
+    transition: opacity 0.3s ease-in-out;
 }
 
+/* Bar Chart Wrapper Styling - Flexbox for side-by-side layout */
+#barChartsWrapper {
+    display: flex;
+    gap: 20px; /* Space between the two bar charts */
+    justify-content: space-between;
+    margin: 20px auto;
+    width: 90%; /* Adjusts the container width */
+}
+
+/* Bar Chart Styling */
+#barChart1, #barChart2 {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.1); /* This could affect visibility */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    height: 500px; 
+}
+
+
+/* Bar Chart Hover Effects */
+.bar {
+    transition: fill 0.3s ease;
+}
+
+
+
+/* Bubble Chart Styling */
+#bubbleChart {
+    margin: 20px auto;
+    width: 1000px;
+    height: 700px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Scatter Plot Styling */
+#Scatterplot {
+    margin: 20px auto;
+    width: 1000px;
+    height: 700px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Filters Styling */
 #filters {
     margin-bottom: 20px;
     text-align: center;
@@ -141,54 +181,6 @@ section p {
     border: 1px solid #ccc;
 }
 
-#barChart {
-    margin: 20px auto;
-    width: 90%;
-    max-width: 800px;
-    height: 500px;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-/* Bar Chart Hover Effects */
-.bar {
-    transition: fill 0.3s;
-}
-
-.bar:hover {
-    fill: orange;
-}
-
-/* Bubble Chart Styling */
-circle {
-    transition: fill 0.3s;
-}
-
-circle:hover {
-    fill: orange;
-}
-
-text {
-    font-size: 10px;
-    fill: white;
-    text-anchor: middle;
-}
-
-/* Button Styling */
-#filterButton {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: #ffffff;
-    background-color: #29f95a;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
 
 #filterButton:hover {
     background-color: #1ab451;
@@ -198,7 +190,7 @@ text {
 .team-container {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 60px;
     flex-wrap: wrap;
     max-width: 1200px;
     margin: 0 auto;
@@ -288,16 +280,45 @@ table img {
     section {
         width: 95%;
     }
+    
+    /* Responsive adjustments */
+@media (max-width: 768px) {
+    #Scatterplot {
+        width: 95%;  /* Adjust width for smaller screens */
+        height: 400px;  /* Adjust height */
+    }
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
 
     nav a {
         font-size: 12px;
         padding: 8px 10px;
     }
 
-    #barChart, #bubbleChart {
-        width: 95%;
-        padding: 15px;
+    /* Adjusting bar chart container to stack charts vertically on small screens */
+    #barChartsWrapper {
+        flex-direction: column; /* Stacks the charts vertically */
+        align-items: center;    /* Center-aligns the charts */
     }
+
+    #barChart1, #barChart2 {
+        width: 95%;  /* Ensures charts take up most of the screen width */
+        height: auto; /* Allow flexible height */
+        margin-bottom: 20px; /* Adds space between the stacked charts */
+    }
+    
+    /* Ensure SVG elements are on top */
+#barChart1 svg, #barChart2 svg {
+    z-index: 10;
+}
+
+    
+    
 
     #MainText {
         font-size: 1.5rem;
@@ -315,4 +336,6 @@ table img {
     .team-member {
         max-width: 100%;
     }
+
+
 }
