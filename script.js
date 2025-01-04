@@ -1,6 +1,8 @@
 // Global variable to store the selected metric for visualization
 let selectedMetric = "streams"; // Set default metric to "streams"
 
+const formattedPoints = points.map(point => point.map(p => p.toFixed(3)).join(", "));
+
 // Function to update visualizations based on the selected metric
 function update(selectedVar) {
     selectedMetric = selectedVar;  // Update the selected metric with the new value

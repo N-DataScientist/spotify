@@ -265,6 +265,7 @@ tree.size() // 2
 ```js-vue
 tree.find({{findState.x.toFixed(3)}}, {{findState.y.toFixed(3)}}) // {{points[findState.i] && `[${points[findState.i].map((p) => p.toFixed(3)).join(", ")}]`}}
 ```
+{{ formattedPoints[findState.i] }}
 
 If there is no datum within the search area, returns undefined.
 
