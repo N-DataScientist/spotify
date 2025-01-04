@@ -46,12 +46,11 @@
             <section>
                 <h2 id="BackgroundInformation">Background Information</h2>
                 <p>
-                    This project explores global music consumption trends using Spotify's "Top Songs 2023" dataset.
-                    <br>The goal of this project is to analyze patterns in music consumption 
-                    by examining various musical attributes such as beats per minute (bpm),<br> positivity (valence), stream count in spotify and word 
-                    count. By analyzing these factors, we aim to uncover patterns that define what makes a song popular worldwide. 
-                    <br> The findings will offer insights into the role of song characteristics in driving user engagement on streaming 
-                    platforms like Spotify.
+                    This project explores global music consumption trends using Spotify's "Top Songs 2023" dataset. <br> 
+                    The research question for this project is: <strong>"How have the characteristics of songs changed, and how do they contribute to their popularity?" </strong>
+                    <br> We aim to answer this by analyzing various musical attributes such as beats per minute (BPM), positivity (valence), stream count, and word count. 
+                    By examining these factors, we will uncover patterns that help explain what makes a song popular on streaming platforms like Spotify. 
+                    <br>The findings will provide insights into the role of specific song characteristics in driving user engagement.
                 </p>
                 <img src="images/Background_1.png" alt="Spotify Dataset" style="width:70%;">
             </section>
@@ -141,21 +140,80 @@
             <section>
                 <h2 id="VisualDesignChoices">Visual Design Choices</h2>
                 <p>
-                    In designing this dashboard, we focused on creating a user-friendly interface that allows easy interaction with the visualizations. 
-                    We utilized the following design principles:
-        <br><br>
-                <b><strong>1. Interactivity:</strong></b> Users can filter data by selecting an artist, then clicking on a song. 
-                    Once a song is selected, the two bar charts update to display its details, such as streams, BPM, positivity, and word count.
+                    In designing the interactive visualizations for this project, the goal was to create a user-friendly interface that not only provides clear insights into 
+                    the data but also facilitates easy interaction. We aimed to follow the core principles of visual design, analytical design, and human perception to enhance 
+                    the user experience and ensure the visualizations communicate effectively. Below, we detail the visual design decisions made for this project, 
+                    with a focus on the foundational principles of design, data-ink ratio, and interactive features.
                 <br><br>
-                <b><strong>2. Clarity:</strong></b> We opted for clear and simple visualizations, such as bar charts and bubble charts, which provide immediate insights.
+                <strong>1. Foundations of Visual Design:</strong>
+                <br><br>     
+                    The foundation of our visual design revolves around the principles of simplicity, clarity, 
+                    and user-centered design. We ensured that the visualizations were clean, intuitive, and easy to navigate. Our primary aim was to reduce complexity, 
+                    allowing users to quickly and effortlessly engage with the data. Simple design elements, such as the use of bars, circles, and lines, 
+                    were carefully chosen to represent the data in a way that users can instantly recognize and interpret. Additionally, we employed an organized layout 
+                    to guide users through the visualizations without overwhelming them. Consistency in color, labeling, and font usage further strengthened 
+                    the clarity of the design, ensuring a cohesive experience across different charts and graphs. By focusing on a minimalistic approach, 
+                    we allowed the data to take center stage, 
+                    ensuring that the key insights were immediately accessible to the user.
                 <br><br>
-                <b><strong>3. Consistency:</strong></b> The color scheme and layout are consistent across all charts and visual elements, ensuring a cohesive experience.
+                <strong>2. Fundamental Principles of Analytical Design (Tufte):</strong> 
+                <br><br>     
+                    Following Edward Tufte’s principles of analytical design, 
+                    we ensured that our visualizations adhered to the concept of clarity in presenting data. Tufte advocates for a visual approach that emphasizes 
+                    simplicity and precision, avoiding unnecessary chart elements that do not add value. For this project, the bubble chart and bar charts were 
+                    designed with these principles in mind. The bubble chart uses simple circles to represent the stream count of each song, with the size of 
+                    the bubble directly correlating to the data. This design choice ensures that the visual representation is immediately understandable. 
+                    The bar charts are similarly clean and straightforward, with well-defined axes and minimal decoration. This simplicity allows the viewer to 
+                    focus on the data, promoting a more effective analysis. By following Tufte’s principles, 
+                    we made sure that every design element served a functional purpose and added to the clarity of the visualization.
                 <br><br>
-                <b><strong>4. Data-Ink Ratio:</strong></b> One of the core principles we followed in the visual design of this project is Data-Ink Ratio, 
-                    a concept introduced by Edward Tufte. This principle emphasizes minimizing non-data ink (such as decorative elements or excessive chart embellishments) 
-                    to ensure that the visual display is as efficient and meaningful as possible. In other words, 
-                    the focus should be on the data itself, without distractions from unnecessary graphical elements.
-                   <br><br> <strong>In our visualizations:</strong> <br><br>
+                <strong>3. Data-Ink Ratio (Tufte):</strong> 
+                <br><br>     
+                    One of the central principles that guided our design choices was the Data-Ink Ratio, 
+                    also introduced by Tufte. This principle emphasizes the need to minimize non-data ink—extraneous visual elements such as unnecessary gridlines, 
+                    labels, or colors that do not contribute to the understanding of the data. In our design, we made a conscious effort to reduce decorative 
+                    elements and focus solely on what is necessary to communicate the data. For example, in the bubble chart, we removed extra gridlines and 
+                    focused only on the essential elements: the bubbles representing the songs and their stream count, the axes, and the color scale. 
+                    The same approach was applied to the bar charts, where the emphasis was placed on the bars themselves, with clear labeling and minimal 
+                    additional styling. By adhering to the data-ink ratio, we ensured that our visualizations presented 
+                    only the most relevant information, eliminating distractions and allowing users to concentrate on the data.
+                    
+                <br><br>
+                <strong>4. Human Perception:</strong>
+                 <br><br> 
+                    Human perception plays a key role in how we interpret visual information, and this understanding shaped 
+                    many of our design choices. When designing our visualizations, we kept in mind the way humans perceive size, color, and spatial relationships. 
+                    For example, in the bubble chart, we use size to represent the stream count of songs, as humans naturally associate larger objects with more importance. 
+                    This allows users to easily compare the popularity of songs at a glance. Similarly, we used a color gradient from light to dark blue to represent 
+                    the range of stream counts, which takes advantage of the fact that humans can quickly interpret color gradients. This color scale not only helps 
+                    users differentiate between values but also adds an aesthetic quality to the chart, making it more visually engaging. By understanding the principles 
+                    of human perception, we optimized the design to ensure that the visualizations were both effective and intuitive for users.
+                <br><br>
+                   <strong>5. Tasks in Data Visualization:</strong>
+                <br><br>    
+                    The primary task in this project was to help users understand the relationship between 
+                    various musical characteristics and the popularity of songs. To facilitate this, we designed two core visualizations: the bubble chart and the bar charts.
+                    The bubble chart serves as an overview of all the songs, with bubbles sized according to the number of streams. This provides users with a high-level 
+                    view of the most popular songs. The bar charts, on the other hand, offer details-on-demand by showing specific attributes of the selected song, 
+                    such as its BPM, positivity, and word count. This approach enables users to perform detailed comparisons of different songs and examine their 
+                    characteristics in relation to their popularity. The interactivity of the dashboard further supports these tasks by allowing users to filter the data, 
+                    select specific artists, and update the visualizations dynamically. This ensures that users can explore the data from different angles and gain deeper 
+                    insights.
+                    
+                    
+                    
+                    
+                <br><br>     
+                   <strong>6. Interaction Concept</strong>
+                 <br><br>     
+                    Our interaction concept follows the overview-first, zoom-and-filter, details-on-demand model, which is a widely recognized framework in data visualization. 
+                    The bubble chart provides an overview of all songs, showing the relative popularity of each based on stream count. Users can filter the data by 
+                    selecting an artist from a dropdown menu. Once a song is selected, the two bar charts update dynamically to provide detailed information about 
+                    the selected song, such as its BPM, positivity, and word count. This interactivity allows users to focus on specific data points while maintaining 
+                    an overview of the larger trends. Additionally, the user can zoom into specific aspects of the data by selecting different metrics, such as speechiness 
+                    or stream count, through the interactive controls. The design encourages exploration by allowing users to actively engage with the data and tailor 
+                    the visualizations to their interests.
+                    
                     <strong>Bubble Chart:</strong> The chart uses simple, clear circles (bubbles) where the size directly corresponds to the stream count of each song. 
                     The design avoids unnecessary clutter and allows the data to take center stage. 
                     The interactions (such as filtering by artist) are also designed to be intuitive and streamlined.
